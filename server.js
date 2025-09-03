@@ -52,9 +52,4 @@ async function testDbConnection() {
         process.exit(1);
     }
     }
-
-    testDbConnection().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
 });
