@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pioneers</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="Images/cropped-Red_star.png" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html"><img src="Images/enhanced_logo.png" alt="Westargy Logo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Products</a>
+                    <ul>
+                        <li><a href="sort.html?category=tools">Tools</a></li>
+                        <li><a href="sort.html?category=lubricants">Lubricants</a></li>
+                        <li><a href="sort.html?category=seamless-line-pipe">Seamless Line Pipe</a></li>
+                        <li><a href="sort.html?category=welding">Welding & Fabricating</a></li>
+                        <li><a href="sort.html?category=fittings">Fittings & Flanges</a></li>
+                        <li><a href="sort.html?category=extinguishers">Extinguishers</a></li>
+                    </ul>
+                </li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="login.html" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+        </div>
+    </header>
+    <div class="sort-container">
+        <label for="sort-options">Sort By:</label>
+        <select id="sort-options">
+            <option value="date-desc">Newest First</option>
+            <option value="date-asc">Oldest First</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="category">Category (A-Z)</option>
+        </select>
+    </div>
+    
+
+
+    <main>
+        <section id="products-display" class="products">
+            <h2 class="label" id="category-title"></h2>
+            <hr>
+            <div class="grid" id="product-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-center">
+                    <p>&copy; 2025 Westargy. All Rights Reserved.</p>
+                    <div class="socials">
+                        <a href="https://www.facebook.com/profile.php?id=61556322989012&rdid=eGsLT5sUF8OMNjGG&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BSWYor58H%2F#"><img src="Images/facebook.png" alt="Facebook Logo" class="social-logo"></a>
+                        <a href="https://www.instagram.com/westar_ios/?igsh=MXJkcTM5aXVoYjFpNg%3D%3D#"><img src="Images/instagram.png" alt="Instagram Logo" class="social-logo"></a>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <p>Tel: +592 611-6871 <br> #9 Malgre Tout Public Road, West Bank Demerara</p>
+                </div>
+            </div>
+        </footer>
+    <script src="javascript/sort.js"></script>
+    <script>
+        async function fetchProducts(division) {
+    const response = await fetch(`http://127.0.0.1:5000/get_products/${division}`);
+    const products = await response.json();
+    console.log(products); // Use this data to display products on your website
+}
+
+fetchProducts("gas"); // Fetch Gas Division products
+fetchProducts("cement"); // Fetch Cement Division products
+
+    </script>
+</body>
+</html>

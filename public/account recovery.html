@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Recovery</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="shortcut icon" type="image/x-icon" href="Images/logo1.png" />
+</head>
+
+<body>
+    <header>
+        <a href="index.html"><img src="Images/logo1.png" alt="Logo"></a>
+    </header>
+    <div class="auth-container">
+        <div class="login-section recovery-container">
+            <h2>Recover Your Password</h2>
+            <form id="recovery-form" class="auth-form">
+                <label for="email">Enter your registered email address:</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                <button type="submit">Send Recovery Email</button>
+                <div class="message" id="message"></div>
+            </form>
+            <form id="code-verification-form" class="auth-form" style="display: none;">
+                <label for="code">Enter the recovery code:</label>
+                <input type="text" id="code" name="code" placeholder="Recovery Code" required>
+                <button type="submit">Verify Code</button>
+                <div class="message" id="verification-message"></div>
+            </form>
+            <br>
+            <a class="text" href="login.html">Back to log in</a>
+        </div>
+    </div>
+
+    <script rel="script" href="javascript/auth.js"></script>
+    <script>
+        document.getElementById('recovery-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = '';
+            messageDiv.className = '';
+
+            try {
+                const response = await fetch('/api/password-recovery', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    messageDiv.textContent = result.message;
+                    messageDiv.classList.add('success');
+                    document.getElementById('code-verification-form').style.display = 'block';
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                messageDiv.textContent = error.message;
+                messageDiv.classList.add('error');
+            }
+        });
+
+        document.getElementById('code-verification-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const code = document.getElementById('code').value;
+            const messageDiv = document.getElementById('verification-message');
+            messageDiv.textContent = '';
+            messageDiv.className = '';
+
+            try {
+                const response = await fetch('/api/verify-code', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code }),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    messageDiv.textContent = result.message;
+                    messageDiv.classList.add('success');
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                messageDiv.textContent = error.message;
+                messageDiv.classList.add('error');
+            }
+        });
+    </script>
+</body>
+</html>

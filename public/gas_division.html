@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pioneers</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="Images/logo1.png" />
+    <style>
+/* Header - Starts Transparent */
+header {
+    display: flex; /* Fixed incorrect 'display: fixed;' */
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    background-color: rgba(232, 232, 232, 0.7); /* More transparent */
+    padding: 10px 20px;
+    color: #454545;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(197, 197, 197, 0.1);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Fully Visible Header When Scrolled */
+header.scrolled {
+    background-color: rgba(231, 231, 231, 1); /* Solid grey */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+}
+
+/* Adjusts Text Color When Scrolled */
+header.scrolled nav ul li a {
+    color: #000000; /* Darker for better contrast */
+}
+
+
+        /* Hero Section with Fade Effect */
+        .hero {
+            position: relative;
+            margin-top: 0%;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            margin-top: 60px; /* Space for the header */
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 120px;
+            border-radius: 10px;
+            color: #fff;
+            width: 100%;
+            height: 110%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .hero-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1800b3;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #008dc9;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+</style>
+</head>
+    <header>
+        <a href="index.html"><img src="Images/logo1.png" alt="Logo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Products</a>
+                    <ul>
+                        <li><a href="sort.html?category=tools">Tools</a></li>
+                        <li><a href="sort.html?category=lubricants">Lubricants</a></li>
+                        <li><a href="sort.html?category=seamless-line-pipe">Seamless Line Pipe</a></li>
+                        <li><a href="sort.html?category=welding">Welding & Fabricating</a></li>
+                        <li><a href="sort.html?category=fittings">Fittings & Flanges</a></li>
+                        <li><a href="sort.html?category=extinguishers">Extinguishers</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sectors</a>
+                    <ul>
+                        <li><a href="gas_division.html?shop=gas">Oil & Gas Sector</a></li>
+                        <li><a href="construction.html?shop=construction">Construction Sector</a></li>
+                        <li><a href="agriculture.html?shop=agriculture">Agriculture Sector</a></li>
+                    </ul>
+                <li><a href="cart_gas.html">Cart</a></li>
+                <li><a href="login.html" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+    <section class="hero" style="margin-top: 0%;">
+        <div class="hero-slide active" style="background-image: url(Images/panorama-offshore-jack-up-rig-in-the-middle-of-the-sea-at-sunset-generative-ai-free-photo.jpg);">
+            <div class="hero-content active">
+                <br>
+                <br>
+                <br>
+                <h1>Dynamic Pioneers Oil & Gas Sector</h1>
+                <p>Satisfaction guaranteed from our products</p>
+                <br>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url(Images/arvind-vallabh-rqWWhKzVCaU-unsplash.jpg)">
+            <div class="hero-content">
+                <br>
+                <br>
+                <br>
+                <h1>Safe & Secure Transport</h1>
+                <p>Ensuring your goods arrive safely and on time.</p>
+                <br>
+            </div>
+        </div>
+    </section>
+
+<section class="products">
+    <h2 class="headings">Featured Products</h2>
+    <hr>
+    <div id="featured-products" class="grid"></div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const gasProducts = [
+        {
+            id: "gas-001",
+            name: "Victor Journeyman 13 Piece",
+            description: "13 Piece set welding system",
+            image: "products/Victor Journeyman 13 Piece Set.jpg",
+            price: "$100"
+        },
+        {
+            id: "gas-002",
+            name: "Forklift lifting attachment",
+            description: "Forklift attachment.",
+            image: "products/Forklift lifting attachment.jpeg",
+            price: "$200"
+        },
+        {
+            id: "gas-003",
+            name: "Helmet",
+            description: "High-quality Helmet.",
+            image: "products/Helmet More saifty.jpeg",
+            price: "$75"
+        },
+        {
+            id: "gas-004",
+            name: "Tap MAGIC Cutting fluid",
+            description: "Quality cutting fluid.",
+            image: "products/tap-magiccuttingfluid.png",
+            price: "$50"
+        }
+    ];
+
+    function renderProducts() {
+        const productContainer = document.getElementById("featured-products");
+        productContainer.innerHTML = "";
+        gasProducts.forEach(product => {
+            const productHTML = `
+                <div class="card">
+                    <a href="product_view.html?id=${product.id}">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                    </a>
+                    <p>${product.description}</p>
+                    <p class="price">${product.price}</p>
+                    <button 
+                        class="add-to-cart"
+                        data-id="${product.id}"
+                        data-name="${product.name}"
+                        data-price="${product.price}"
+                        data-image="${product.image}"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+            productContainer.innerHTML += productHTML;
+        });
+        attachCartListeners();
+    }
+
+    function attachCartListeners() {
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", function () {
+                const qty = prompt("How many would you like to add?");
+                if (qty && !isNaN(qty) && qty > 0) {
+                    const product = {
+                        id: this.dataset.id,
+                        name: this.dataset.name,
+                        price: this.dataset.price,
+                        image: this.dataset.image,
+                        quantity: parseInt(qty)
+                    };
+                    addToCart(product);
+                } else {
+                    alert("Invalid quantity.");
+                }
+            });
+        });
+    }
+
+    function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart_gas")) || [];
+        cart.push(product);
+        localStorage.setItem("cart_gas", JSON.stringify(cart));
+        alert(`Added ${product.quantity} x ${product.name} to cart!`);
+    }
+
+    renderProducts();
+});
+</script>

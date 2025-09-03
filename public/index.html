@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pioneers</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="Images/logo1.png" />
+    <style>
+        /* General Styles */
+        body {
+            margin-top: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+/* Header - Starts Transparent */
+header {
+    display: flex; /* Fixed incorrect 'display: fixed;' */
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    background-color: rgba(232, 232, 232, 0.7); /* More transparent */
+    padding: 10px 20px;
+    color: #454545;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(197, 197, 197, 0.1);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Fully Visible Header When Scrolled */
+header.scrolled {
+    background-color: rgba(231, 231, 231, 1); /* Solid grey */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+}
+
+/* Adjusts Text Color When Scrolled */
+header.scrolled nav ul li a {
+    color: #000000; /* Darker for better contrast */
+}
+
+header img {
+    height: 60px;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li {
+    position: relative;
+    border-color: #000000;
+}
+
+nav ul li a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent hover effect */
+    border-color: #3f3f3f;
+}
+
+/* Header (initial state with transparency) */
+header, nav ul li ul {
+    background-color: rgba(232, 232, 232, 0.9); /* Same transparency as the header */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Dropdown Menu */
+nav ul li ul {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border-radius: 8px;
+    list-style: none;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    min-width: max-content; /* Ensures the width fits the text properly */
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li ul li a {
+    color: #000000;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+nav ul li ul li a:hover {
+    background-color: rgba(96, 96, 96, 0.2); /* Slight highlight on hover */
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* When scrolled past hero section */
+header.scrolled, nav ul li ul.scrolled {
+    background-color: #e7e7e7 !important; /* Solid background after scrolling */
+}
+
+
+        /* Hero Section with Fade Effect */
+        .hero {
+            position: relative;
+            margin-top: 0%;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 60px; /* Space for the header */
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .hero-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8afff7;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #12ebff;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        /* Slider Arrows */
+        .hero-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .hero-arrow {
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            user-select: none;
+        }
+
+        .hero-arrow:hover {
+            color: rgba(235, 233, 233, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .side-panel-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="responsive-container">
+    <header id="header">
+        <a href="index.html"><img src="Images/logo1.png" alt="Logo" style="width: 100px;height: 40%;"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Shop Now</a>
+                    <ul>
+                        <li><a href="gas_division.html?shop=gas">Oil Field Solutions</a></li>
+                        <li><a href="construction.html?shop=construction">Construction Solutions</a></li>
+                        <li><a href="agriculture.html">Agriculture Solutions</a></li>
+                    </ul>
+                </li>
+                <li><a href="#aboutus">About</a></li>
+                <li><a href="login.html" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+
+    <!-- Hero Section with Fade Effect -->
+    <section class="hero" style="margin-top: 0%;">
+        <div class="hero-slide active" style="background-image: url('Images/backdrop.jpg');">
+            <div class="hero-content active">
+                <h1>Your trusted partner for importing high-quality Material.</h1>
+                <br>
+                <p> From global markets satisfaction is guaranteed from our products</p>
+                <br>
+                <a href="#aboutus" class="btn">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('Images/abackdrop.jpg');">
+            <div class="hero-content">
+                <h1>Satisfaction Guaranteed!</h1>
+                <br>
+                <p>At Dynamic Pioneers Ltd we make global logistics seamless and efficient. Ensuring we provide exactly what you need!</p>
+                <br>
+                <button><a href="#aboutus" class="btn">Learn More</a></button>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('Images/gggg.jpg');">
+            <div class="hero-content">
+                <h1>Dynamic Pioneers your top supplier in all your Oil & Gas Industry needs.</h1>
+                <br>
+                <p>Dynamic Pioneers drives progress with innovative solutions, efficiency, and a commitment to excellence.</p>
+                <br>
+                <a href="gas_division.html" class="btn">Shop now</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('Images/DEbackdrop.jpg');">
+            <div class="hero-content">
+                <h1>Dynamic Pioneers High Quality Construction Solutions.</h1>
+                <br>
+                <p>Dynamic Pioneers Ltd supplies industrial needs, importing high-quality construction material globally for the Guyana market.</p>
+                <br>
+                <a href="construction.html" class="btn">Shop now</a>
+            </div>
+        </div>
+
+        <div class="hero-arrows">
+            <span class="hero-arrow" onclick="prevSlide()">&#10094;</span>
+            <span class="hero-arrow" onclick="nextSlide()">&#10095;</span>
+        </div>
+        <br>
+        <br>
+    </section>
+<!-- Cards Section -->
+<br>
+<h2>&nbspOur Divisons</h2>
+<hr>
+<br>
+<section class="cards-section" style="display: flex; flex-wrap: wrap; justify-content: space-between; padding: 20px; background-color: #ffffff;">
+    <!-- Cement Division Card -->
+    <div class="card" style="flex: 1; margin: 40px; max-width: 40%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border: 1px solid #ccc; overflow: hidden;">
+        <img src="Images/iStock-1376528807_cementtrowel.avif" alt="Cement Division" style="width: 100%; height: 200px; object-fit: cover;">
+        <div style="padding: 15px; text-align: center;">
+            <h2>Construction Division</h2>
+            <p>Highquality products for construction and industrial use.</p>
+            <a href="concrete_division.html?shop=concrete" class="btn" style="display: inline-block; padding: 10px 20px; background-color: #12ebff; color: #000000; border-color: #000000; text-decoration: none; border: 5px; transition: all 0.3s ease;">Shop</a>
+        </div>
+    </div>
+
+    <!-- Oil & Gas Division Card -->
+    <div class="card" style="flex: 1; margin: 40px; max-width: 60%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border: 1px solid #ccc; overflow: hidden;">
+        <img src="Images/bbbackdrop.jpg" alt="Oil & Gas Division" style="width: 100%; height: 200px; object-fit: cover;">
+        <div style="padding: 15px; text-align: center;">
+            <h2>Oil & Gas Division</h2>
+            <p>The best Industrial supplies for the all your oil & gas sector needs.</p>
+            <a href="gas_division.html?shop=gas" class="btn" style="display: inline-block; padding: 10px 20px; background-color: #12ebff; color: #000000; border-color: #000000; text-decoration: none; border: 5px; transition: all 0.3s ease;">Shop</a>
+        </div>
+    </div>
+        <div class="card" style="flex: 1; margin: 40px; max-width: 60%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border: 1px solid #ccc; overflow: hidden;">
+        <img src="Images/bbackdrop.jpg" alt="Oil & Gas Division" style="width: 100%; height: 200px; object-fit: cover;">
+        <div style="padding: 15px; text-align: center;">
+            <h2>Agriculture Division</h2>
+            <p>Our large varity of high quality supplies for all your agricultural needs.</p>
+            <a href="gas_division.html?shop=gas" class="btn" style="display: inline-block; padding: 10px 20px; background-color: #12ebff; color: #000000; border-color: #000000; text-decoration: none; border: 5px; transition: all 0.3s ease;">Shop</a>
+        </div>
+    </div>
+</section>
+<br id="aboutus">
+<br> <br> <br> <br> <br> <br>
+
+<h1 class="label" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 32px; color: #003e7d; font-weight: 700;">
+    High-Quality Products for Maximum Efficiency
+</h1>
+<br>
+<p class="text" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 18px; line-height: 1.8; color: #333;">
+    <b>Dynamic Pioneers</b> is your trusted partner for premium industrial and construction solutions, proudly serving the
+    <span style="font-weight: bold;">Oil & Gas</span>,
+    <span style="font-weight: bold;">Agriculture</span>,
+    and <span style="font-weight: bold;">Construction</span> sectors.
+    From high-grade <b>steel, BRC, pipes, valves, and fittings</b> to precision tools, machinery, and safety equipment,
+    we supply everything you need to keep operations running at peak performance.
+    Our commitment to <b>quality, competitive pricing, and fast delivery</b> ensures you get the right products when you need them most.
+</p>
+<br>
+
+<h1 class="label" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 32px; color: #003e7d; font-weight: 700;">
+    Durability & Reliability You Can Count On
+</h1>
+<br>
+<p class="text" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 18px; line-height: 1.8; color: #333;">
+    At <b>Dynamic Pioneers</b>, every product is sourced to deliver unmatched strength, endurance, and performance. 
+    Whether it’s <b>reinforcement steel, structural components, heavy-duty machinery</b>, or agricultural-grade implements, 
+    our supplies are designed to withstand the toughest conditions. 
+    We partner with leading manufacturers to provide products that meet and exceed industry standards—helping you 
+    <b>minimize downtime, extend equipment lifespan, and maximize efficiency</b>.
+</p>
+<br>
+
+<h1 class="label" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 32px; color: #003e7d; font-weight: 700;">
+    A Supplier That Keeps Your Business Moving
+</h1>
+<br>
+<p class="text" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 18px; line-height: 1.8; color: #333;">
+    Whether you’re drilling deep in the oilfields, expanding agricultural production, or managing large-scale 
+    infrastructure projects, <b>Dynamic Pioneers</b> has the resources to keep you moving. 
+    We offer <b>steel sheets, mesh, pipes, welding supplies, hydraulic tools, irrigation equipment, and more</b>—all backed by 
+    expert advice and technical support. Our customer-first approach means we don’t just sell products, 
+    we deliver <b>solutions tailored to your industry’s needs</b>.
+</p>
+<br>
+
+<h1 class="label" style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 32px; color: #003e7d; font-weight: 700;">
+    Why Choose Dynamic Pioneers?
+</h1>
+<br>
+<blockquote>
+<ul style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 18px; line-height: 1.8; color: #333; margin-left: 40px;">
+    <li>Extensive product range for Oil & Gas, Agriculture, and Construction</li>
+    <li>High-quality materials sourced from trusted manufacturers</li>
+    <li>Competitive prices without compromising quality</li>
+    <li>Fast and reliable delivery to keep your projects on schedule</li>
+    <li>Expert technical advice and industry-specific solutions</li>
+    <li>Commitment to safety, durability, and long-term value</li>
+</ul>
+</blockquote>
+<br>
+<hr style="margin: 30px 0; border: 1px solid #ccc;">
+
+    <!-- Footer -->
+    <footer>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-center">
+                    <p>&copy; 2025 Dynamic Pioneers. All Rights Reserved.</p>
+                    <div class="socials">
+                        <a href="https://www.facebook.com/profile.php?id=61556322989012&rdid=eGsLT5sUF8OMNjGG&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BSWYor58H%2F#"  target="_blank" rel="noopener noreferrer"><img src="Images/facebook.png" alt="Facebook Logo" class="social-logo"></a>
+                        <a href="https://www.instagram.com/westar_ios/?igsh=MXJkcTM5aXVoYjFpNg%3D%3D#"  target="_blank" rel="noopener noreferrer"><img src="Images/instagram.png" alt="Instagram Logo" class="social-logo"></a>
+                        <a href="#"><img src="Images/whatsapp.png" alt="What's App Logo" class="social-logo"  target="_blank" rel="noopener noreferrer"></a>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <p>Tel: +592 611-6871 <br> +152 620-4050 <br> #9 Malgre Tout Public Road, West Bank Demerara</p>
+                </div>
+            </div>
+        </footer>
+    <script>
+        console.log("<<Source Coded by Joshua's Labs est 2024>>")
+        // Slider Functionality
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const contents = document.querySelectorAll('.hero-content');
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            contents.forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        }
+        
+        setInterval(nextSlide, 8000);
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        const heroSection = document.querySelector('.hero');
+
+        window.addEventListener('scroll', () => {
+            const heroHeight = heroSection.offsetHeight;
+            if (window.scrollY > heroHeight) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <script src="javascript/fancytext.js"></script>
+</body>
+</html>

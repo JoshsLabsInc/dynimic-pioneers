@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Westargy Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        form input, form textarea, form select, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+
+        .product-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .product-list th, .product-list td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .product-list th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        .status-message {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        /* Analytics Section */
+        .analytics-chart {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post" action="../index.html">
+        <button type="submit">Logout</button>
+    </form>
+    <div class="container">
+        <h1>Westargy Admin Panel</h1>
+
+        <!-- Manage Products Section -->
+        <div class="section">
+            <h2>Manage Products</h2>
+            <form id="add-product-form">
+                <label for="product-name">Product Name:</label>
+                <input type="text" id="product-name" placeholder="Enter product name" required>
+
+                <!-- Division Selector -->
+                <label for="product-division">Division:</label>
+                <select id="product-division" required>
+                    <option value="">Select division</option>
+                    <option value="gas">Oil & Gas Division</option>
+                    <option value="concrete">Concrete Division</option>
+                    <option value="agriculture">Agriculture Division</option>
+                </select>
+
+                <!-- Category Selector (dynamic) -->
+                <label for="product-category">Category:</label>
+                <select id="product-category" required disabled>
+                    <option value="">First select division</option>
+                </select>
+
+                <label for="product-description">Description:</label>
+                <textarea id="product-description" rows="3" placeholder="Enter product description" required></textarea>
+
+                <label for="product-image">Product Image:</label>
+                <input type="file" id="product-image" accept="image/*" required>
+
+                <div class="image-preview" id="image-preview">
+                    <p>No image selected</p>
+                </div>
+
+                <button type="submit">Add Product</button>
+            </form>
+
+
+            <!-- Status Message -->
+            <div id="status-message" class="status-message"></div>
+
+            <!-- Existing Products Table -->
+            <h2>Existing Products</h2>
+            <table class="product-list" id="product-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Division</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Products will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Site Statistics Section -->
+        <div class="section">
+            <h2>Site Statistics</h2>
+            <div class="analytics-chart">
+                <canvas id="analytics-chart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Joshua's Labs.</p>
+    </footer>
+
+    <!-- Include Chart.js Library -->
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

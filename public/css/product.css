@@ -1,0 +1,268 @@
+/* Product View Page CSS */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #333;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+.product-view {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    gap: 30px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-image-container {
+    flex: 1;
+    position: relative;
+}
+
+.product-image-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.product-image-container img:hover {
+    transform: scale(1.05);
+}
+
+.magnifier {
+    position: absolute;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    display: none;
+    pointer-events: none;
+}
+
+.magnifier img {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+}
+
+.product-details {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-details h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.product-details p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.product-details .price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #e64a19;
+}
+
+.product-details label {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+.product-details .btn {
+    padding: 12px 24px;
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.product-details .btn:hover {
+    background-color: #1976d2;
+    transform: translateY(-2px);
+}
+
+.product-details .btn:active {
+    transform: translateY(0);
+}
+
+.product-details .btn.share-button {
+    background-color: #4caf50;
+}
+
+.product-details .btn.share-button:hover {
+    background-color: #388e3c;
+}
+
+.product-details .star-rating {
+    display: flex;
+    margin-top: 20px;
+}
+
+.product-details .star {
+    font-size: 2rem;
+    color: #ffd700;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.product-details .star:hover,
+.product-details .star:hover ~ .star {
+    color: #ffeb3b;
+}
+
+.comments-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.comments-section #comments-container {
+    margin-bottom: 20px;
+}
+
+.comments-section textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    resize: none;
+    font-size: 1rem;
+}
+
+.comments-section .btn {
+    margin-top: 10px;
+}
+
+.frequently-bought {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.frequently-bought h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.frequently-bought .grid {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.frequently-bought .card {
+    min-width: 250px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.frequently-bought .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.frequently-bought .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.frequently-bought .card h3 {
+    margin: 15px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.frequently-bought .card .price {
+    margin: 0 15px 15px;
+    color: #555;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 40px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}

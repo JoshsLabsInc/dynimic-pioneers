@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pioneers</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="Images/logo1.png" />
+    <style>
+.product-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 90%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin: 50px auto;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.product-image-container {
+    width: 450px;
+    height: 450px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-details {
+    flex: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.product-description {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quantity-label {
+    font-size: 16px;
+    color: #222;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-to-cart, .share-button {
+    background-color: rgb(255, 51, 51);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: 10px;
+    width: 100%;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.add-to-cart:hover, .share-button:hover {
+    background-color: rgb(200, 43, 43);
+    transform: scale(1.05);
+}
+
+.recommendations {
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.recommendation-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.recommendation-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 180px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.recommendation-item a {
+    display: block;
+    text-decoration: none;
+    color: #d10000;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.recommendation-item a:hover {
+    color: rgb(200, 43, 43);
+}
+
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .product-description {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #d10000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff1a1a;
+        }
+
+        .back-btn {
+            background-color: #555;
+        }
+
+        .back-btn:hover {
+            background-color: #777;
+        }
+
+        .recommended {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html"><img src="Images/enhanced_logo.png" alt="Westargy Logo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart_gas.html">Oil & Gas Cart</a></li>
+                <li><a href="cart_cement.html">Cement Cart</a></li>
+                <li><a href="login.html" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+        </div>
+        </div>
+    </header>
+    <br>
+<body>
+    <div class="container">
+        <img id="product-image" src="" alt="Product Image" class="product-image">
+        <h1 id="product-name" class="product-title"></h1>
+        <p id="product-description" class="product-description"></p>
+        <div class="button-container">
+            <button id="add-to-cart" class="btn">Add to Cart</button>
+            <button onclick="goBack()" class="btn back-btn">Back to Shop</button>
+        </div>
+    </div>
+
+    <div class="recommended">
+        <h2>Recommended Products</h2>
+        <p>More products coming soon...</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Westargy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get("id");
+
+            const allProducts = [
+                { id: "cement-001", name: "Premium Grade Cement", description: "High-strength cement for industrial and residential projects.", image: "Images/grade_cement.jpg", cart: "cart_cement" },
+                { id: "cement-002", name: "Hydraulic Cement", description: "Quick-setting cement ideal for repairs and water-resistant applications.", image: "Images/hydraulic_cement.jpg", cart: "cart_cement" },
+                { id: "gas-001", name: "Industrial Wrench Set", description: "Durable wrenches for industrial maintenance.", image: "Images/wrench_set.jpg", cart: "cart_gas" },
+                { id: "gas-002", name: "High-Performance Lubricant", description: "Ensures smooth machine operations and reduces friction.", image: "Images/lubricant.jpg", cart: "cart_gas" },
+                { id: "gas-003", name: "Seamless Line Pipe", description: "High-quality seamless pipe for oil & gas transportation.", image: "Images/seamless_pipe.jpg", cart: "cart_gas" }
+            ];
+
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) {
+                document.querySelector(".container").innerHTML = "<p>Product not found.</p>";
+                return;
+            }
+
+            document.getElementById("product-image").src = product.image;
+            document.getElementById("product-image").onerror = function() {
+                this.src = "Images/placeholder.jpg";
+            };
+            document.getElementById("product-name").textContent = product.name;
+            document.getElementById("product-description").textContent = product.description;
+
+            document.getElementById("add-to-cart").addEventListener("click", function() {
+                let cart = JSON.parse(localStorage.getItem(product.cart)) || [];
+                cart.push(product);
+                localStorage.setItem(product.cart, JSON.stringify(cart));
+                alert(`Added ${product.name} to cart!`);
+            });
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

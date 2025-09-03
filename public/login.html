@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Sign Up</title>
+    <link href="css/login.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="Images/logo1.png" />
+    <style>
+        /* Include any specific styling tweaks for the redesign */
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="Images/logo1.png" alt="Westargy Logo"></a>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-options">
+            <!-- Login Section -->
+            <div class="login-section">
+                <h2>Login</h2>
+                <form class="auth-form">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" name="login-username" placeholder="Enter your username" required />
+
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="login-password" placeholder="Enter your password" required />
+
+                    <button type="submit" class="btn" id="login-button">Login</button>
+                    <button type="button" class="btn-toggle" id="to-signup">Don't have an account? Sign Up</button>
+                </form>
+                <br>
+                <a class="text" href="account recovery.html">Forget Password</a>
+            </div>
+
+            <!-- Sign Up Section -->
+            <div class="signup-section">
+                <h2>Create an Account</h2>
+                <form class="auth-form">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" name="signup-username" placeholder="Choose a username" required />
+
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="signup-email" placeholder="Enter your email" required />
+
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="signup-password" placeholder="Create a password" required />
+
+                    <button type="submit" class="btn">Sign Up</button>
+                    <button type="button" class="btn-toggle" id="to-login">Already have an account? Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const authOptions = document.querySelector('.auth-options');
+        const toSignupBtn = document.getElementById('to-signup');
+        const toLoginBtn = document.getElementById('to-login');
+
+        // Add event listeners to toggle between login and signup sections
+        toSignupBtn.addEventListener('click', () => {
+            authOptions.style.transform = 'rotateY(180deg)';
+        });
+
+        toLoginBtn.addEventListener('click', () => {
+            authOptions.style.transform = 'rotateY(0deg)';
+        });
+    </script>
+</body>
+</html>
